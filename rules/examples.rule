@@ -1,0 +1,6 @@
+alert icmp any any -> $HOME_NET any (msg:"ICMP test detected"; GID:1; sid:7000010; rev:1; classtype:icmp-event;)
+alert tcp any any -> any 21 (msg:"FTP connection attempt"; flags:S;sid:7000011;flow:to_client; rev:1;classtype:attempted-user;)
+alert tcp any any -> any any (msg:"FTP Login Failed!"; content:"incorrect.";  sid:7000012; rev:1;classtype:suspicious-login;)
+drop tcp any any -> any 21 (msg:"ET FTP Suspicious Vulnerability VSFTPD"; flow:established,to_server; content:":)";sid:7000013;rev:1;classtype:attempted-user;)
+alert tcp any any -> $HOME_NET any (msg:"TCP Port Scanning";GID:1; sid:7000014; classtype:web-application-attack;)
+drop tcp any any -> any any (msg:"LOCAL DOS SYN packet flood inbound, Potential DOS"; flow:to_server; sid:7000015; flags: S; threshold: type both, track by_dst, count 5000, seconds 5; classtype:misc-activity;)
