@@ -1,0 +1,24 @@
+title: Windows Defender Threat Detection Disabled
+status: stable
+description: Posible deshabilitación de Windows Defender
+references:
+    - https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-antivirus/troubleshoot-windows-defender-antivirus
+author: Alberto Aparicio Vila
+tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+logsource:
+    product: windows
+    service: defender
+detection:
+    selection:
+        EventID:
+            - 5001 # Real-time protection is disabled.
+            - 5010 # Scanning for malware and other potentially unwanted software is disabled.
+            - 5012 # Scanning for viruses is disabled.
+            - 5101 # The antimalware platform is expired.
+    condition: selection
+falsepositives:
+    - Administrator actions (should be investigated)
+    - Seen being triggered occasionally during Windows Defender Updates
+level: high

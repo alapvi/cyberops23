@@ -1,0 +1,14 @@
+title: Detecting Hash-ID
+status: experimental
+description: Detecta MD5 Hashes
+author: Alberto Aparicio Vila
+logsource:
+    product: zeek
+    service: file
+detection:
+    selection:
+        event.module: 'zeek'
+        event.dataset: 'file'
+        hash.md5: '7a4e49d728f3d4b0d224bea966dc402e'
+    condition: selection
+level: high

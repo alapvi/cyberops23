@@ -1,0 +1,19 @@
+title: Cisco Talos Blacklist Check
+status: experimental
+description: Check IP blacklist Cisco Talos
+references:
+- https://www.talosintelligence.com/documents/ip-blacklist
+author: Alberto Aparicio
+date: 25/06/2023
+tags:
+- attack.blacklists
+logsource:
+  product: zeek
+  service: conn
+detection:
+  selection:
+    destination.ip:
+    - 87.251.151.133
+    - 5.238.215.35
+  condition: selection
+level: critical
